@@ -1,434 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Q, AI for GxP and ISO Documentation</title>
-<meta name="description" content="Agent Q is an AI assistant for regulated documentation in GxP and ISO environments: it helps teams write better documents the first time, find the right procedure in seconds and check drafts against regulations and standards, with a source for every answer.">
-<link rel="icon" type="image/png" href="assets/favicon.png">
-<style>
-  :root {
-    --bg: #0b0d12;
-    --bg-panel: #12151d;
-    --bg-soft: #0f1219;
-    --border: #232838;
-    --text: #eef0f4;
-    --text-dim: #9aa3b5;
-    --accent: #6fa9e3;
-    --accent-strong: #9fcbf2;
-    --accent-dim: #16263a;
-    --on-accent: #0b0d12;
-    --max-width: 1040px;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #fbfbfd;
-      --bg-panel: #ffffff;
-      --bg-soft: #f2f5fa;
-      --border: #e2e6ee;
-      --text: #171a21;
-      --text-dim: #535b6b;
-      --accent: #1e4e8c;
-      --accent-strong: #163b6b;
-      --accent-dim: #e3edf8;
-      --on-accent: #ffffff;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-  a { color: var(--accent); }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>History Writes the Future</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="description" content="Agent Q – an on-premise AI assistant for GxP quality management. Answers grounded in your own SOPs and guidelines, cited and audited." />
 
-  /* ── header ── */
-  header.top {
-    padding: 22px 0;
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 10;
-    background: var(--bg);
-  }
-  header.top .wrap { display: flex; align-items: center; justify-content: space-between; }
-  .brand { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.08em; text-decoration: none; color: var(--text); }
-  .brand span { color: var(--accent); }
-  nav a { color: var(--text-dim); text-decoration: none; font-size: 0.92rem; margin-left: 26px; }
-  nav a:hover { color: var(--text); }
+  <!-- Inter (hero UI) + Inter Tight (scroll scenes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  /* ── hero / introduction ── */
-  section.hero { padding: 92px 0 76px; }
-  .eyebrow {
-    display: inline-block;
-    color: var(--accent);
-    background: var(--accent-dim);
-    border-radius: 999px;
-    padding: 5px 14px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 22px;
-  }
-  h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.13;
-    margin: 0 0 22px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    max-width: 820px;
-  }
-  .lede { font-size: 1.18rem; color: var(--text-dim); max-width: 680px; margin: 0 0 32px; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn {
-    display: inline-block;
-    border-radius: 10px;
-    padding: 12px 22px;
-    font-weight: 600;
-    font-size: 0.98rem;
-    text-decoration: none;
-    border: 1px solid var(--accent);
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .btn.primary { background: var(--accent); color: var(--on-accent); }
-  .btn.primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
-  .btn.ghost { background: transparent; color: var(--accent); }
-  .btn.ghost:hover { background: var(--accent-dim); }
+  <!-- BubbledotICG-FinePos (retro dot-matrix display) -->
+  <link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet" />
 
-  /* ── sections ── */
-  section.block { padding: 72px 0; border-top: 1px solid var(--border); }
-  section.block.soft { background: var(--bg-soft); }
-  .kicker {
-    color: var(--accent);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-  }
-  h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.2; margin: 0 0 14px; }
-  .intro { color: var(--text-dim); max-width: 660px; font-size: 1.05rem; margin: 0 0 40px; }
+  <!-- Font Awesome 6.5.2 (brand icons) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
-  .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .card {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 26px 24px;
-  }
-  .card h3 { font-size: 1.08rem; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
-  .card p { font-size: 0.95rem; color: var(--text-dim); margin: 0; }
-  .icon {
-    flex: none;
-    width: 36px; height: 36px;
-    border-radius: 9px;
-    background: var(--accent-dim);
-    color: var(--accent);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 1.05rem;
-  }
-  ul.questions { list-style: none; padding: 0; margin: 0; }
-  ul.questions li {
-    position: relative;
-    padding: 12px 0 12px 22px;
-    border-top: 1px solid var(--border);
-    color: var(--text-dim);
-    font-size: 0.97rem;
-  }
-  ul.questions li:first-child { border-top: none; padding-top: 2px; }
-  ul.questions li::before {
-    content: "?";
-    position: absolute; left: 0; top: 12px;
-    color: var(--accent);
-    font-weight: 800;
-  }
-  ul.questions li:first-child::before { top: 2px; }
-
-  /* ── the turn ── */
-  section.turn { padding: 84px 0 0; border-top: 1px solid var(--border); text-align: center; }
-  section.turn p {
-    font-size: clamp(1.5rem, 3.6vw, 2.3rem);
-    font-weight: 700;
-    line-height: 1.25;
-    margin: 0 auto;
-    max-width: 760px;
-  }
-  section.turn p span { color: var(--accent); }
-
-  /* ── introducing Agent Q ── */
-  .presenting { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center; margin-bottom: 56px; }
-  .presenting p { color: var(--text-dim); font-size: 1.05rem; margin: 0 0 16px; }
-  .presenting p strong { color: var(--text); }
-  .logo-tile {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 26px;
-    display: flex; justify-content: center;
-  }
-  .logo-tile img { width: 100%; max-width: 300px; height: auto; display: block; }
-  h3.sub { font-size: 1.2rem; margin: 48px 0 20px; }
-
-  .roles { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .role { border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; }
-  .role h4 { margin: 0 0 6px; font-size: 1rem; }
-  .role p { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
-
-  .principles { display: grid; gap: 14px 28px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-  .principle { display: flex; gap: 12px; align-items: flex-start; }
-  .principle h4 { margin: 0 0 4px; font-size: 0.98rem; }
-  .principle p { margin: 0; color: var(--text-dim); font-size: 0.92rem; }
-
-  /* ── contact ── */
-  section.contact { padding: 84px 0 92px; border-top: 1px solid var(--border); }
-  .contact-panel {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 44px 40px;
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center;
-  }
-  .contact-panel p { color: var(--text-dim); margin: 0; font-size: 1.05rem; }
-  .contact-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-  #email-link { font-size: 1.08rem; font-weight: 600; word-break: break-all; }
-  .hint { color: var(--text-dim); font-size: 0.85rem; }
-
-  footer { border-top: 1px solid var(--border); padding: 28px 0; }
-  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-  footer p { color: var(--text-dim); font-size: 0.85rem; margin: 0; }
-
-  @media (max-width: 760px) {
-    .presenting, .contact-panel { grid-template-columns: 1fr; }
-    .logo-tile { max-width: 300px; }
-    .contact-panel { padding: 30px 22px; }
-  }
-  @media (max-width: 560px) {
-    section.hero { padding: 60px 0 52px; }
-    header.top nav { display: none; }
-    section.block { padding: 56px 0; }
-  }
-</style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Bowl glow: tiny canvas stretched to the viewport (drawn by main.js) -->
+  <div class="atmo" aria-hidden="true"><canvas id="bg" width="96" height="60"></canvas><canvas id="fx"></canvas></div>
 
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#">AGENT<span>Q</span></a>
-    <nav>
-      <a href="#problem">The problem</a>
-      <a href="#agent-q">Agent Q</a>
-      <a href="#contact">Contact</a>
+  <!-- Fixed header (white nav pill + pop-in "Get a demo") -->
+  <header class="header" id="nav">
+    <a class="logo" href="#top" aria-label="Agent Q – back to top">
+      <img src="assets/logo.webp" alt="" width="52" height="52" />
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link is-active" href="#top" aria-current="page">Home</a>
+      <a class="nav-link" href="#problem">The problem</a>
+      <a class="nav-link" href="#agent-q">Agent Q</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+
+    <div class="h-right">
+      <div class="navcta">
+        <a class="btn" href="#contact" tabindex="-1">
+          <span class="lbl">Get a demo</span>
+          <span class="dot"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5" /></svg></span>
+        </a>
+      </div>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="menu-overlay" id="menuOverlay" hidden></div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav aria-label="Mobile">
+      <a class="m-link is-active" href="#top" aria-current="page" style="--i: 0">Home</a>
+      <a class="m-link" href="#problem" style="--i: 1">The problem</a>
+      <a class="m-link" href="#agent-q" style="--i: 2">Agent Q</a>
+      <a class="m-link" href="#contact" style="--i: 3">Contact</a>
     </nav>
   </div>
-</header>
 
-<!-- Introduction -->
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">AI for GxP and ISO documentation &middot; now in pilot</span>
-    <h1>Documentation that moves your company forward instead of holding it back.</h1>
-    <p class="lede">
-      In a regulated company, every procedure, deviation and change has to be written,
-      reviewed and approved. That is how quality is assured, and it is also where time,
-      patience and knowledge get lost. Agent Q is an AI assistant built for exactly this
-      work: it helps your people write better documents the first time, find the right
-      procedure in seconds and check drafts against regulations and standards before they go to review.
-    </p>
-    <div class="actions">
-      <a class="btn primary" href="#contact">Book a demonstration</a>
-      <a class="btn ghost" href="#agent-q">Meet Agent Q</a>
-    </div>
-  </div>
-</section>
+  <main>
+    <!-- =====================================================
+         SCENE 0 — Video hero (unchanged design)
+         ===================================================== -->
+    <section class="hero-video" id="top">
+      <div class="bg" aria-hidden="true">
+        <video class="bg-video" id="heroVideo" autoplay muted loop playsinline>
+          <source
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
 
-<!-- Problem statements -->
-<section class="block soft" id="problem">
-  <div class="wrap">
-    <p class="kicker">Sound familiar?</p>
-    <h2>Documentation touches everyone, and everyone feels it differently.</h2>
-    <p class="intro">Whatever your role, the same paperwork gets in the way of the work that matters.</p>
-    <div class="grid">
-      <div class="card">
-        <h3><span class="icon">&#128200;</span>Upper Management</h3>
-        <ul class="questions">
-          <li>Tired of always hearing that documents are not finished and still under review?</li>
-          <li>Do you feel that all the paperwork is slowing you down in guiding the company and creating long-lasting value?</li>
-          <li>Had enough of searching for that one business plan idea or marketing campaign you created some time ago, the one that would be perfect for your current situation?</li>
-          <li>Wondering why the digital AI transformation of the company is taking so long and not showing results?</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#128269;</span>Quality Employees</h3>
-        <ul class="questions">
-          <li>Tired of always receiving badly written documents, where your feedback never seems to have a learning effect?</li>
-          <li>Do you feel that correcting the same mistakes over and over again keeps you from improving quality where it really makes a difference?</li>
-          <li>Had enough of explaining procedures to people who should know them already and could simply look them up in the documentation?</li>
-          <li>Wondering if the promised digital AI transformation will be more than the free Copilot version in Outlook?</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#128221;</span>Non-Quality Employees</h3>
-        <ul class="questions">
-          <li>Tired of always receiving negative feedback and countless corrections on your documents?</li>
-          <li>Do you feel that filling out documents is an unnecessary burden that keeps you from your actual, productive work?</li>
-          <li>Had enough of constantly changing, chaotic documentation, where in the end you don't even know how the task should be done?</li>
-          <li>Wondering what ChatGPT will do with all the company documents you uploaded and asked it to correct?</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="page">
+        <div class="hero">
+          <div class="trust anim" style="--d: 0.05s">
+            <span class="avatar a1" title="Windows host"><span class="avatar-inner"><i class="fa-brands fa-microsoft" aria-hidden="true"></i></span></span>
+            <span class="avatar a2" title="Docker"><span class="avatar-inner"><i class="fa-brands fa-docker" aria-hidden="true"></i></span></span>
+            <span class="avatar a3" title="Python"><span class="avatar-inner"><i class="fa-brands fa-python" aria-hidden="true"></i></span></span>
+            <span class="trust-pill">AI for GxP and ISO documentation · now in pilot</span>
+          </div>
 
-<!-- The turn -->
-<section class="turn">
-  <div class="wrap">
-    <p>There is one solution to <span>all</span> these problems.</p>
-  </div>
-</section>
+          <h1 class="headline anim">
+            <span class="line l1">History Writes</span>
+            <span class="line l2">the Future</span>
+          </h1>
 
-<!-- Introducing Agent Q -->
-<section class="block" id="agent-q" style="border-top: none;">
-  <div class="wrap">
-    <div class="presenting">
-      <div>
-        <p class="kicker">Introducing</p>
-        <h2>Agent Q</h2>
-        <p>
-          <strong>Agent Q is an AI assistant for regulated documentation in GxP and ISO
-          environments.</strong> It works with any type of regulated information, from your approved
-          procedures, forms and records to the applicable guidelines and standards such as
-          EU GMP, PIC/S, ICH and ISO, and puts that knowledge at the fingertips of everyone
-          who writes, reviews or relies on your documents.
-        </p>
-        <p>
-          Agent Q is delivered the way that suits you: as <strong>Software as a Service (SaaS)</strong>
-          or locally <strong>on premise</strong>, on your company's own hardware.
-        </p>
-      </div>
-      <div class="logo-tile">
-        <img src="assets/agentq-logo.png" width="520" height="520" alt="Agent Q logo: a robotic hand holding a quill inside the letter Q, with the tagline History writes the future">
-      </div>
-    </div>
+          <p class="subhead anim" style="--d: 0.28s">
+            Documentation that moves your company forward instead of holding it back –
+            an AI assistant for regulated work, grounded in your own documents.
+          </p>
 
-    <h3 class="sub">What Agent Q does</h3>
-    <p class="intro">
-      These are the standard modules included with Agent Q. Thanks to its microkernel
-      architecture, the existing modules can be adapted and additional modules added,
-      so that Agent Q fully fits your company's needs.
-    </p>
-    <div class="grid">
-      <div class="card">
-        <h3><span class="icon">&#9888;</span>Deviations &amp; CAPA</h3>
-        <p>Drafts deviation reports and CAPA plans field by field from the facts you enter, following your own procedures, and fills in your company's Word forms.</p>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#128260;</span>Change requests</h3>
-        <p>Helps prepare change requests and proposes their GxP and regulatory classification, naming the criteria it relied on.</p>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#9989;</span>Compliance check of drafts</h3>
-        <p>Checks a draft document section by section against regulations and standards before it goes to review, and lists proposed findings with the clause they refer to.</p>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#128218;</span>Guideline search</h3>
-        <p>Answers questions from the official guidelines and standards with the exact passage, so there is no more scrolling through hundreds of pages.</p>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#128172;</span>Ask your own documents</h3>
-        <p>Ask how a task is done or what was decided before, and get the answer from your own procedures and records, with the document it came from.</p>
-      </div>
-      <div class="card">
-        <h3><span class="icon">&#9993;</span>Private office assistant</h3>
-        <p>A locally run language model helps you correct texts, draft e-mails and translate sensitive documents, without sharing them with AI companies.</p>
-      </div>
-    </div>
+          <a class="cta anim" style="--d: 0.4s" href="#problem">Get Started</a>
+        </div>
 
-    <h3 class="sub">What changes for you</h3>
-    <div class="roles">
-      <div class="role">
-        <h4>Upper Management</h4>
-        <p>Documents get finished and approved sooner, and the knowledge already in your documents can be found again instead of being recreated from scratch.</p>
+        <div class="stats" aria-label="Release 1.0.0 key figures">
+          <div class="stat anim" style="--d: 0.5s">
+            <span class="stat-icon" aria-hidden="true">&lt;</span>
+            <span class="stat-value" data-target="2317" data-suffix="" data-decimals="0">0</span>
+            <span class="stat-label">Automated Tests Passed</span>
+          </div>
+          <div class="stat anim" style="--d: 0.58s">
+            <span class="stat-icon" aria-hidden="true">%</span>
+            <span class="stat-value" data-target="94" data-suffix="%" data-decimals="0">0%</span>
+            <span class="stat-label">Code Coverage</span>
+          </div>
+          <div class="stat anim" style="--d: 0.66s">
+            <span class="stat-icon" aria-hidden="true">*</span>
+            <span class="stat-value" data-target="18" data-suffix="" data-decimals="0">0</span>
+            <span class="stat-label">Offline Install Steps</span>
+          </div>
+          <div class="stat anim" style="--d: 0.74s">
+            <span class="stat-icon" aria-hidden="true">#</span>
+            <span class="stat-value" data-target="166" data-suffix="/166" data-decimals="0">0/166</span>
+            <span class="stat-label">Concurrency Checks</span>
+          </div>
+        </div>
       </div>
-      <div class="role">
-        <h4>Quality Employees</h4>
-        <p>Drafts arrive in better shape, recurring mistakes are caught before review, and you gain time for the improvements that really matter.</p>
-      </div>
-      <div class="role">
-        <h4>Non-Quality Employees</h4>
-        <p>Check your own drafts before you hand them in and get support from Agent Q while you write your documents, with fewer correction loops, the right procedure found in seconds and more time for your actual work.</p>
-      </div>
-    </div>
+    </section>
 
-    <h3 class="sub">Built for GxP and ISO environments</h3>
-    <p class="intro">
-      Agent Q is being built for GxP and ISO environments and developed with the newest
-      industry guidance in mind: <strong>ISPE GAMP&reg; 5 Guide, Second Edition</strong>, the
-      <strong>ISPE GAMP&reg; Guide: Artificial Intelligence</strong> and the draft
-      <strong>EudraLex Volume&nbsp;4, Annex&nbsp;22 (Artificial Intelligence)</strong>, with the aim of
-      being fully compliant and validatable in your quality system.
-    </p>
-    <div class="principles">
-      <div class="principle">
-        <span class="icon">&#128196;</span>
-        <div><h4>Grounded, with citations</h4><p>Every answer points back to the document and section it came from.</p></div>
-      </div>
-      <div class="principle">
-        <span class="icon">&#128100;</span>
-        <div><h4>You stay in control</h4><p>Suggestions and findings are proposals, and people review, decide and sign.</p></div>
-      </div>
-      <div class="principle">
-        <span class="icon">&#128274;</span>
-        <div><h4>As a service or on premise</h4><p>Use Agent Q as Software as a Service (SaaS) or run it on premise on your company's own hardware, so your data stays where you want it.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Contact -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-panel">
-      <div>
-        <p class="kicker">Get in touch</p>
-        <h2>Reach out to us</h2>
-        <p>Receive more information about Agent Q or book a demonstration. We are happy to show you how it works with documents like yours.</p>
+    <!-- =====================================================
+         SCENE 1 — The problem (pinned; one audience per step)
+         ===================================================== -->
+    <section class="facts stepper problem" id="problem" style="--n: 4" aria-label="The problem">
+      <div class="facts-pin">
+        <ol class="rail" aria-label="Audiences">
+          <li><button type="button" data-i="0"><span>01</span>Upper Management</button></li>
+          <li><button type="button" data-i="1"><span>02</span>Quality Employees</button></li>
+          <li><button type="button" data-i="2"><span>03</span>Non-Quality Employees</button></li>
+          <li><button type="button" data-i="3"><span>04</span>The solution</button></li>
+        </ol>
+        <div class="counter" aria-hidden="true">01 / 04</div>
+
+        <article class="fact">
+          <p class="f-kicker">Sound familiar? · Upper Management</p>
+          <h2 class="f-h">Documentation touches everyone, and everyone feels it differently.</h2>
+          <ul class="qs">
+            <li data-k>Tired of always hearing that documents are not finished and still under review?</li>
+            <li data-k>Do you feel that all the paperwork is slowing you down in guiding the company and creating long-lasting value?</li>
+            <li data-k>Had enough of searching for that one business plan idea or marketing campaign you created some time ago, the one that would be perfect for your current situation?</li>
+            <li data-k>Wondering why the digital AI transformation of the company is taking so long and not showing results?</li>
+          </ul>
+        </article>
+
+        <article class="fact">
+          <p class="f-kicker">Sound familiar? · Quality Employees</p>
+          <h2 class="f-h">The same mistakes, corrected over and over again.</h2>
+          <ul class="qs">
+            <li data-k>Tired of always receiving badly written documents, where your feedback never seems to have a learning effect?</li>
+            <li data-k>Do you feel that correcting the same mistakes over and over again keeps you from improving quality where it really makes a difference?</li>
+            <li data-k>Had enough of explaining procedures to people who should know them already and could simply look them up in the documentation?</li>
+            <li data-k>Wondering if the promised digital AI transformation will be more than the free Copilot version in Outlook?</li>
+          </ul>
+        </article>
+
+        <article class="fact">
+          <p class="f-kicker">Sound familiar? · Non-Quality Employees</p>
+          <h2 class="f-h">Paperwork that keeps you from your actual work.</h2>
+          <ul class="qs">
+            <li data-k>Tired of always receiving negative feedback and countless corrections on your documents?</li>
+            <li data-k>Do you feel that filling out documents is an unnecessary burden that keeps you from your actual, productive work?</li>
+            <li data-k>Had enough of constantly changing, chaotic documentation, where in the end you don't even know how the task should be done?</li>
+            <li data-k>Wondering what ChatGPT will do with all the company documents you uploaded and asked it to correct?</li>
+          </ul>
+        </article>
+
+        <article class="fact turn">
+          <p class="f-kicker">Whatever your role</p>
+          <h2 class="f-h">There is one solution to <span class="hl">all</span> these problems.</h2>
+        </article>
       </div>
-      <div class="contact-actions">
-        <button class="btn primary" type="button" id="show-email">Show e-mail address</button>
-        <a id="email-link" hidden></a>
-        <noscript><span class="hint">Please enable JavaScript to see our e-mail address.</span></noscript>
+    </section>
+
+    <!-- =====================================================
+         SCENE 2 — Statement (pinned, letter-by-letter on scroll)
+         ===================================================== -->
+    <section class="statement" id="statement">
+      <div class="pin">
+        <p id="stmt">Agent Q is an AI assistant for <span class="hl">GxP quality</span><br> that answers from your own SOPs, checks deviations,<br> reviews change requests, cites every source<br> and keeps your data where you want it</p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<footer>
-  <div class="wrap">
-    <p>&copy; 2026 Agent Q</p>
-    <p>History writes the future.</p>
-  </div>
-</footer>
 
-<script>
-  // The address is never in the page source: it is put together only when a visitor asks for it,
-  // which keeps it away from address-harvesting crawlers.
-  document.getElementById("show-email").addEventListener("click", function () {
-    var user = ["agent", "q", "com", "pany"].join("");
-    var host = ["gm", "ail"].join("") + "." + ["c", "om"].join("");
-    var address = user + String.fromCharCode(64) + host;
-    var link = document.getElementById("email-link");
-    link.href = "mai" + "lto:" + address + "?subject=" + encodeURIComponent("Agent Q, information / demonstration");
-    link.textContent = address;
-    link.hidden = false;
-    this.hidden = true;
-  });
-</script>
+    <!-- =====================================================
+         Introducing Agent Q + the standard modules
+         ===================================================== -->
+    <section class="section" id="agent-q">
+      <div class="intro-grid">
+        <div>
+          <p class="s-kicker rv">Introducing</p>
+          <h2 class="s-h" data-reveal>Agent Q</h2>
+          <p class="s-p rv"><strong>Agent Q is an AI assistant for regulated documentation in GxP and ISO environments.</strong> It works with any type of regulated information, from your approved procedures, forms and records to the applicable guidelines and standards such as EU GMP, PIC/S, ICH and ISO, and puts that knowledge at the fingertips of everyone who writes, reviews or relies on your documents.</p>
+          <p class="s-p rv">Agent Q is delivered the way that suits you: as <strong>Software as a Service (SaaS)</strong> or locally <strong>on premise</strong>, on your company's own hardware.</p>
+        </div>
+        <div class="logo-tile rv"><img src="assets/agentq_logo.png" alt="Agent Q logo: a robotic hand holding a quill inside the letter Q, with the tagline History writes the future" loading="lazy" /></div>
+      </div>
 
+      <h3 class="s-sub rv">What Agent Q does</h3>
+      <p class="s-intro rv">These are the standard modules included with Agent Q. Thanks to its microkernel architecture, the existing modules can be adapted and additional modules added, so that Agent Q fully fits your company's needs.</p>
+      <div class="mods">
+        <div class="mod rv"><span class="m-n">01</span><h4>Deviations &amp; CAPA</h4><p>Drafts deviation reports and CAPA plans field by field from the facts you enter, following your own procedures, and fills in your company's Word forms.</p></div>
+        <div class="mod rv"><span class="m-n">02</span><h4>Change requests</h4><p>Helps prepare change requests and proposes their GxP and regulatory classification, naming the criteria it relied on.</p></div>
+        <div class="mod rv"><span class="m-n">03</span><h4>Compliance check of drafts</h4><p>Checks a draft document section by section against regulations and standards before it goes to review, and lists proposed findings with the clause they refer to.</p></div>
+        <div class="mod rv"><span class="m-n">04</span><h4>Guideline search</h4><p>Answers questions from the official guidelines and standards with the exact passage, so there is no more scrolling through hundreds of pages.</p></div>
+        <div class="mod rv"><span class="m-n">05</span><h4>Ask your own documents</h4><p>Ask how a task is done or what was decided before, and get the answer from your own procedures and records, with the document it came from.</p></div>
+        <div class="mod rv"><span class="m-n">06</span><h4>Private office assistant</h4><p>A locally run language model helps you correct texts, draft e-mails and translate sensitive documents, without sharing them with AI companies.</p></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SCENE 3 — Release 1.0.0 on premise: key facts (pinned)
+         ===================================================== -->
+    <section class="facts stepper" id="facts" style="--n: 9" aria-label="Agent Q release 1.0.0 on premise – key facts">
+      <div class="facts-pin">
+        <ol class="rail" id="rail" aria-label="Key facts">
+          <li><button type="button" data-i="0"><span>01</span>At a glance</button></li>
+          <li><button type="button" data-i="1"><span>02</span>How it answers</button></li>
+          <li><button type="button" data-i="2"><span>03</span>Confidence gate</button></li>
+          <li><button type="button" data-i="3"><span>04</span>One host</button></li>
+          <li><button type="button" data-i="4"><span>05</span>Installation</button></li>
+          <li><button type="button" data-i="5"><span>06</span>Security</button></li>
+          <li><button type="button" data-i="6"><span>07</span>Data residency</button></li>
+          <li><button type="button" data-i="7"><span>08</span>Audit trail</button></li>
+          <li><button type="button" data-i="8"><span>09</span>Validation</button></li>
+        </ol>
+        <div class="counter" aria-hidden="true">01 / 09</div>
+
+        <!-- 01 -->
+        <article class="fact">
+          <p class="f-kicker">01 — Release 1.0.0 on premise at a glance</p>
+          <h2 class="f-h">One self-contained AI system on one server</h2>
+          <div class="f-viz f-stats">
+            <div data-k><b data-count="6">6</b><span>modules on one shared core</span></div>
+            <div data-k><b data-count="0">0</b><span>cloud services – no data leaves your network</span></div>
+            <div data-k><b data-count="1">1</b><span>Windows host, one HTTPS port for users</span></div>
+            <div data-k><b data-count="18">18</b><span>guided, resumable installer steps</span></div>
+          </div>
+        </article>
+
+
+        <!-- 03 -->
+        <article class="fact">
+          <p class="f-kicker">02 — How an answer is produced</p>
+          <h2 class="f-h">Retrieval first, generation second</h2>
+          <p class="f-body" data-k>The model never answers from memory – it summarises passages from your approved documents and must cite document, section and page.</p>
+          <div class="f-viz flow">
+            <span data-k>Question</span><i data-k>→</i>
+            <span data-k>Hybrid search</span><i data-k>→</i>
+            <span data-k>Reranking</span><i data-k>→</i>
+            <span data-k class="hot">Confidence gate</span><i data-k>→</i>
+            <span data-k>Answer + citations</span>
+          </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="fact">
+          <p class="f-kicker">03 — Confidence gate</p>
+          <h2 class="f-h">It abstains rather than guesses</h2>
+          <p class="f-body" data-k>If no passage is close enough, Agent Q says so. The thresholds are calibrated, recorded in every audit record and testable in OQ/PQ.</p>
+          <div class="f-viz gate" data-k>
+            <div class="gate-bar"><i class="g-a"></i><i class="g-b"></i><i class="g-c"></i></div>
+            <div class="gate-ticks"><span style="left:0">0.0</span><span style="left:48%">0.48 general</span><span style="left:60%">0.60 named document</span><span style="left:100%">1.0</span></div>
+            <div class="gate-legend"><span><i class="g-a"></i>Answer</span><span><i class="g-c"></i>“I don’t have sufficiently relevant information …”</span></div>
+          </div>
+        </article>
+
+        <!-- 05 -->
+        <article class="fact">
+          <p class="f-kicker">04 — System landscape</p>
+          <h2 class="f-h">Everything runs on one dedicated Windows host</h2>
+          <div class="f-viz f-stats tokens">
+            <div data-k><b>:8100</b><span>the only port reachable from the LAN – HTTPS</span></div>
+            <div data-k><b>127.0.0.1</b><span>Weaviate, Ollama and the control panel stay on loopback</span></div>
+            <div data-k><b>read-only</b><span>document folders – source files are never modified</span></div>
+          </div>
+        </article>
+
+        <!-- 06 -->
+        <article class="fact">
+          <p class="f-kicker">05 — Offline installation</p>
+          <h2 class="f-h">18 guided steps, resumable after any interruption</h2>
+          <p class="f-body" data-k>A SHA-256 manifest is checked before anything installs; the final installation check produces IQ evidence.</p>
+          <div class="f-viz phases">
+            <div data-k><b>00–03</b><span>Prepare</span></div>
+            <div data-k><b>04–07</b><span>Platform</span></div>
+            <div data-k><b>08–12</b><span>Application</span></div>
+            <div data-k class="hot"><b>13–18</b><span>Go live</span></div>
+          </div>
+        </article>
+
+        <!-- 07 -->
+        <article class="fact">
+          <p class="f-kicker">06 — Security</p>
+          <h2 class="f-h">Every request passes five layers</h2>
+          <div class="f-viz layers">
+            <div data-k style="--n:0"><b>L1</b>Security headers</div>
+            <div data-k style="--n:1"><b>L2</b>Host &amp; origin guard</div>
+            <div data-k style="--n:2"><b>L3</b>Authentication</div>
+            <div data-k style="--n:3"><b>L4</b>Licence gate</div>
+            <div data-k style="--n:4" class="hot"><b>L5</b>Application rules</div>
+          </div>
+          <p class="f-body" data-k>Independent pre-release audit: 0 critical or high findings, 0 secrets in code or git history.</p>
+        </article>
+
+        <!-- 08 -->
+        <article class="fact">
+          <p class="f-kicker">07 — Data residency</p>
+          <h2 class="f-h">Your documents and questions never leave the host</h2>
+          <div class="f-viz f-stats tokens">
+            <div data-k><b>No cloud AI</b><span>models run locally – no API keys, no external services</span></div>
+            <div data-k><b>Offline</b><span>model hubs offline, telemetry disabled everywhere</span></div>
+            <div data-k><b>ACL</b><span>state and logs restricted to administrators and the service account</span></div>
+          </div>
+        </article>
+
+        <!-- 09 -->
+        <article class="fact">
+          <p class="f-kicker">08 — Audit trail</p>
+          <h2 class="f-h">Every AI answer is recorded – attributable and complete</h2>
+          <p class="f-body" data-k>User, UTC timestamp, sources, applied threshold and answer hash in every record; about ten years’ retention with hash-chained backups.</p>
+          <div class="f-viz chips">
+            <span data-k>Attributable</span>
+            <span data-k>Contemporaneous</span>
+            <span data-k>Original &amp; accurate</span>
+            <span data-k>Complete</span>
+            <span data-k>Enduring &amp; available</span>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="fact">
+          <p class="f-kicker">09 — Validation package</p>
+          <h2 class="f-h">A GAMP 5 document set ready for your validation</h2>
+          <div class="f-viz f-stats">
+            <div data-k><b data-count="4">4</b><span>concept-phase documents</span></div>
+            <div data-k><b data-count="8">8</b><span>project-phase documents incl. IQ / OQ / PQ</span></div>
+            <div data-k><b data-count="8">8</b><span>supplier QMS procedures</span></div>
+            <div data-k><b data-count="101">101</b><span>architecture fitness tests on every build</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         What changes for you + Built for GxP and ISO environments
+         ===================================================== -->
+    <section class="section" id="for-you">
+      <h3 class="s-sub rv">What changes for you</h3>
+      <div class="roles">
+        <div class="role rv"><h4>Upper Management</h4><p>Documents get finished and approved sooner, and the knowledge already in your documents can be found again instead of being recreated from scratch.</p></div>
+        <div class="role rv"><h4>Quality Employees</h4><p>Drafts arrive in better shape, recurring mistakes are caught before review, and you gain time for the improvements that really matter.</p></div>
+        <div class="role rv"><h4>Non-Quality Employees</h4><p>Check your own drafts before you hand them in and get support from Agent Q while you write your documents, with fewer correction loops, the right procedure found in seconds and more time for your actual work.</p></div>
+      </div>
+
+      <h3 class="s-sub rv">Built for GxP and ISO environments</h3>
+      <p class="s-intro rv">Agent Q is being built for GxP and ISO environments and developed with the newest industry guidance in mind: <strong>ISPE GAMP® 5 Guide, Second Edition</strong>, the <strong>ISPE GAMP® Guide: Artificial Intelligence</strong> and the draft <strong>EudraLex Volume 4, Annex 22 (Artificial Intelligence)</strong>, with the aim of being fully compliant and validatable in your quality system.</p>
+      <div class="principles">
+        <div class="principle rv"><h4>Grounded, with citations</h4><p>Every answer points back to the document and section it came from.</p></div>
+        <div class="principle rv"><h4>You stay in control</h4><p>Suggestions and findings are proposals, and people review, decide and sign.</p></div>
+        <div class="principle rv"><h4>As a service or on premise</h4><p>Use Agent Q as Software as a Service (SaaS) or run it on premise on your company's own hardware, so your data stays where you want it.</p></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SCENE 4 — Dark split: contact
+         ===================================================== -->
+    <section class="split" id="contact">
+      <div class="l">
+        <h2 id="h2">Reach out to us</h2>
+        <div class="row" id="row">
+          <h3>Get in touch</h3>
+          <div>
+            <p><strong>Information or a demonstration.</strong> Receive more information about Agent Q or book a demonstration. We are happy to show you how it works with documents like yours.</p>
+            <button class="btn" type="button" id="show-email">
+              <span class="lbl">Show e-mail address</span>
+              <span class="dot"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5" /></svg></span>
+            </button>
+            <a class="email-link" id="email-link" hidden></a>
+            <noscript><p>Please enable JavaScript to see our e-mail address.</p></noscript>
+          </div>
+        </div>
+        <p class="sign-off">© 2026 Agent Q · History writes the future.</p>
+      </div>
+      <div class="r">
+        <img id="ship" src="assets/agentq_logo.png" alt="Agent Q logo – History writes the future" loading="lazy" />
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
 </body>
 </html>
