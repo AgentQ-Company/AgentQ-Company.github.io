@@ -831,54 +831,66 @@ main {
 
 /* confidence gate */
 .gate {
-  max-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
+  max-width: 900px;
 }
 
-.gate-bar {
-  display: flex;
-  height: 30px;
-  border-radius: 999px;
-  overflow: hidden;
+.gate-ex {
+  padding: clamp(16px, 1.8vw, 24px);
+  border-radius: 18px;
   border: 1px solid rgba(11, 29, 58, 0.18);
+  background: rgba(255, 255, 255, 0.38);
+  color: var(--ink);
 }
 
-.gate-bar i { display: block; height: 100%; }
-.gate-bar .g-a { width: 48%; background: var(--ink); }
-.gate-bar .g-b { width: 12%; background: #5b7cf0; }
-.gate-bar .g-c { flex: 1; background: rgba(255, 255, 255, 0.45); }
-
-.gate-ticks {
-  position: relative;
-  height: 34px;
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--ink-2);
+.gate-ex.yes {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
 }
 
-.gate-ticks span {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  white-space: nowrap;
-}
-
-.gate-ticks span:first-child { transform: none; }
-.gate-ticks span:last-child { transform: translateX(-100%); }
-.gate-ticks span:nth-child(2) { transform: translateX(-100%); padding-right: 8px; }
-.gate-ticks span:nth-child(3) { transform: none; padding-left: 8px; }
-
-.gate-legend {
+.gate-tag {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 26px;
-  font-size: 14px;
-  color: var(--ink-2);
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.75;
 }
 
-.gate-legend span { display: inline-flex; align-items: center; gap: 8px; }
-.gate-legend i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 1px solid rgba(11, 29, 58, 0.3); }
-.gate-legend .g-a { background: var(--ink); }
-.gate-legend .g-c { background: rgba(255, 255, 255, 0.6); }
+.gate-tag i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+.gate-ex.yes .gate-tag i { background: var(--dot); border-color: var(--dot); }
+
+.gate-q {
+  margin-top: 14px;
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.gate-a {
+  margin-top: 10px;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+.gate-src {
+  margin-top: 12px;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
 
 /* installer phases */
 .phases {
@@ -1455,8 +1467,11 @@ main {
 
   .layers > div { margin-left: calc(var(--n) * 14px); }
 
-  .gate-ticks span:nth-child(2),
-  .gate-ticks span:nth-child(3) { font-size: 11px; }
+  .gate { grid-template-columns: 1fr; }
+  .gate-ex { padding: 14px 16px; }
+  .gate-q { margin-top: 8px; }
+  .gate-a { margin-top: 6px; }
+  .gate-src { margin-top: 6px; }
 
   .split {
     grid-template-columns: 1fr;

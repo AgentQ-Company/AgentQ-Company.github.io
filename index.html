@@ -269,10 +269,19 @@
           <p class="f-kicker">03 — Confidence gate</p>
           <h2 class="f-h">It abstains rather than guesses</h2>
           <p class="f-body" data-k>If no passage is close enough, Agent Q says so. The thresholds are calibrated, recorded in every audit record and testable in OQ/PQ.</p>
-          <div class="f-viz gate" data-k>
-            <div class="gate-bar"><i class="g-a"></i><i class="g-b"></i><i class="g-c"></i></div>
-            <div class="gate-ticks"><span style="left:0">0.0</span><span style="left:48%">0.48 general</span><span style="left:60%">0.60 named document</span><span style="left:100%">1.0</span></div>
-            <div class="gate-legend"><span><i class="g-a"></i>Answer</span><span><i class="g-c"></i>“I don’t have sufficiently relevant information …”</span></div>
+          <div class="f-viz gate">
+            <div class="gate-ex yes" data-k>
+              <p class="gate-tag"><i></i>Inside the gate – answered</p>
+              <p class="gate-q">“What is the minimal pressure difference between 2 cleanrooms?”</p>
+              <p class="gate-a">“Adjacent rooms of different grades should have an air pressure difference of a minimum of 10 Pascals (guidance value).”</p>
+              <p class="gate-src">Annex 1, 4.14</p>
+            </div>
+            <div class="gate-ex no" data-k>
+              <p class="gate-tag"><i></i>Outside the gate – abstains</p>
+              <p class="gate-q">“Where did I put my paper printout of the filling batch record?”</p>
+              <p class="gate-a">“I don’t have sufficiently relevant information …”</p>
+              <p class="gate-src">No source cited</p>
+            </div>
           </div>
         </article>
 
@@ -281,8 +290,8 @@
           <p class="f-kicker">04 — System landscape</p>
           <h2 class="f-h">Everything runs on one dedicated Windows host</h2>
           <div class="f-viz f-stats tokens">
-            <div data-k><b>:8100</b><span>the only port reachable from the LAN – HTTPS</span></div>
-            <div data-k><b>127.0.0.1</b><span>Weaviate, Ollama and the control panel stay on loopback</span></div>
+            <div data-k><b>one port</b><span>the only port reachable from the LAN – HTTPS</span></div>
+            <div data-k><b>local</b><span>vector database, package manager for AI models and the control panel are reachable only on the host itself</span></div>
             <div data-k><b>read-only</b><span>document folders – source files are never modified</span></div>
           </div>
         </article>
